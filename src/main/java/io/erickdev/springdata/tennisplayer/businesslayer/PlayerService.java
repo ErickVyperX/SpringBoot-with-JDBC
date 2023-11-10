@@ -23,4 +23,21 @@ public class PlayerService {
     public Player showPlayer(int id) {
         return playerDAO.selectPlayerById(id);
     }
+
+    public String addPlayer(Player player) {
+        return playerDAO.insertPlayer(player) == 1 ? "Player added successfully" : "Player not added";
+    }
+
+    public String updatePlayer(Player player) {
+        return playerDAO.updatePlayer(player) == 1 ? "Player updated successfully" : "Player not updated";
+    }
+
+    public String deletePlayer(int id) {
+        return playerDAO.deletePlayer(id) == 1 ? "Player deleted successfully" : "Player not deleted";
+    }
+
+    public String createTournamentTable() {
+        playerDAO.createTable();
+        return "Table created successfully";
+    }
 }

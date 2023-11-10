@@ -7,4 +7,8 @@ import java.util.List;
 public interface PlayerDAO {
     List<Player> selectAllPlayers();
     Player selectPlayerById(int id);
+    int insertPlayer(Player player);
+    int updatePlayer(Player player);
+    int deletePlayer(int id);
+    void createTable();
 }
