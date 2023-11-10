@@ -30,5 +30,6 @@ public class TennisPlayerApplication implements CommandLineRunner {
         logger.info("Updating result: {}", playerServiceJDBC.updatePlayer(new Player(4, "Thiem", "Austria", LocalDate.now(), 18)));
         logger.info("Deleting result: {}", playerServiceJDBC.deletePlayer(4));
         logger.info("Creating result: {}", playerServiceJDBC.createTournamentTable());
+        logger.info("Players by nationality: {}", playerServiceJDBC.listPlayersByNationality("France"));
     }
 }

@@ -6,6 +6,7 @@ import java.util.List;
 @Repository
 public interface PlayerDAO {
     List<Player> selectAllPlayers();
+    List<Player> selectPlayersByNationality(String nationality);
     Player selectPlayerById(int id);
     int insertPlayer(Player player);
     int updatePlayer(Player player);

@@ -40,4 +40,8 @@ public class PlayerService {
         playerDAO.createTable();
         return "Table created successfully";
     }
+
+    public List<Player> listPlayersByNationality(String nationality) {
+        return playerDAO.selectPlayersByNationality(nationality);
+    }
 }

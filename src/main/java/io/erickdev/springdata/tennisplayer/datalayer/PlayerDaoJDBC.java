@@ -4,7 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 @Repository
@@ -13,6 +17,7 @@ public class PlayerDaoJDBC implements PlayerDAO{
     private final JdbcTemplate jdbcTemplate;
     private static final String SQL_SELECT = "SELECT * FROM PLAYER";
     private static final String SQL_SELECT_BY_ID = "SELECT * FROM PLAYER WHERE ID = ?";
+    private static final String SQL_SELECT_BY_NATIONALITY = "SELECT * FROM PLAYER WHERE NATIONALITY = ?";
     private static final String SQL_INSERT = "INSERT INTO PLAYER VALUES (?, ?, ?, ?, ?)";
     private static final String SQL_UPDATE = "UPDATE PLAYER SET NAME = ?, NATIONALITY = ?, BIRTH_DATE = ?, TITLES = ? WHERE ID = ?";
     private static final String SQL_DELETE = "DELETE FROM PLAYER WHERE ID = ?";
@@ -52,5 +57,22 @@ public class PlayerDaoJDBC implements PlayerDAO{
     @Override
     public void createTable() {
         jdbcTemplate.execute(SQL_CREATE);
+    }
+
+    public List<Player> selectPlayersByNationality(String nationality) {
+        return jdbcTemplate.query(SQL_SELECT_BY_NATIONALITY, new PlayerMapper(), nationality);
+    }
+
+    private static final class PlayerMapper implements RowMapper<Player> {
+        @Override
+        public Player mapRow(ResultSet rs, int rowNum) throws SQLException {
+            Player player = new Player();
+            player.setId(rs.getInt("id"));
+            player.setName(rs.getString("name"));
+            player.setNationality(rs.getString("nationality"));
+            player.setBirth_date(rs.getDate("birth_date").toLocalDate());
+            player.setTitles(rs.getInt("titles"));
+            return player;
+        }
     }
 }
