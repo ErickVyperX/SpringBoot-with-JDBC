@@ -1,8 +1,15 @@
 package io.erickdev.springdata.tennisplayer.datalayer;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import java.time.LocalDate;
 import java.util.StringJoiner;
+
+@Entity
 public class Player {
+    @Id
+    @GeneratedValue
     private int id;
     private String name;
     private String nationality;
@@ -12,11 +19,20 @@ public class Player {
     public Player() {
     }
 
-    public Player(int id, String name, String nationality, LocalDate birthdate, int titles) {
-        this.id = id;
+    public Player(String name, String nationality, LocalDate birthdate, int titles) {
+        super();
         this.name = name;
         this.nationality = nationality;
         this.birth_date = birthdate;
+        this.titles = titles;
+    }
+
+    public Player(int id, String name, String nationality, LocalDate birth_date, int titles) {
+        super();
+        this.id = id;
+        this.name = name;
+        this.nationality = nationality;
+        this.birth_date = birth_date;
         this.titles = titles;
     }
 
@@ -66,7 +82,7 @@ public class Player {
                 .add("id=" + id)
                 .add("name='" + name + "'")
                 .add("nationality='" + nationality + "'")
-                .add("birthdate=" + birth_date)
+                .add("birth_date=" + birth_date)
                 .add("titles=" + titles)
                 .toString();
     }
