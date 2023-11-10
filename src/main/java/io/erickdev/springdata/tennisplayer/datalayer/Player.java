@@ -1,22 +1,22 @@
 package io.erickdev.springdata.tennisplayer.datalayer;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.StringJoiner;
 public class Player {
     private int id;
     private String name;
     private String nationality;
-    private Date birthdate;
+    private LocalDate birth_date;
     private int titles;
 
     public Player() {
     }
 
-    public Player(int id, String name, String nationality, Date birthdate, int titles) {
+    public Player(int id, String name, String nationality, LocalDate birthdate, int titles) {
         this.id = id;
         this.name = name;
         this.nationality = nationality;
-        this.birthdate = birthdate;
+        this.birth_date = birthdate;
         this.titles = titles;
     }
 
@@ -44,12 +44,12 @@ public class Player {
         this.nationality = nationality;
     }
 
-    public Date getBirthdate() {
-        return birthdate;
+    public LocalDate getBirth_date() {
+        return birth_date;
     }
 
-    public void setBirthdate(Date birthdate) {
-        this.birthdate = birthdate;
+    public void setBirth_date(LocalDate birth_date) {
+        this.birth_date = birth_date;
     }
 
     public int getTitles() {
@@ -66,7 +66,7 @@ public class Player {
                 .add("id=" + id)
                 .add("name='" + name + "'")
                 .add("nationality='" + nationality + "'")
-                .add("birthdate=" + birthdate)
+                .add("birthdate=" + birth_date)
                 .add("titles=" + titles)
                 .toString();
     }

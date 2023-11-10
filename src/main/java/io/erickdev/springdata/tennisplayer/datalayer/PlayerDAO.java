@@ -6,4 +6,5 @@ import java.util.List;
 @Repository
 public interface PlayerDAO {
     List<Player> selectAllPlayers();
+    Player selectPlayerById(int id);
 }

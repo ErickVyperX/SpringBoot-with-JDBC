@@ -12,6 +12,7 @@ import java.util.List;
 public class PlayerDaoJDBC implements PlayerDAO{
     private final JdbcTemplate jdbcTemplate;
     private static final String SQL_SELECT = "SELECT * FROM PLAYER";
+    private static final String SQL_SELECT_BY_ID = "SELECT * FROM PLAYER WHERE ID = ?";
 
     @Autowired
     public PlayerDaoJDBC(JdbcTemplate jdbcTemplate) {
@@ -21,5 +22,10 @@ public class PlayerDaoJDBC implements PlayerDAO{
     @Override
     public List<Player> selectAllPlayers() {
         return jdbcTemplate.query(SQL_SELECT, new BeanPropertyRowMapper<>(Player.class));
+    }
+
+    @Override
+    public Player selectPlayerById(int id) {
+        return jdbcTemplate.queryForObject(SQL_SELECT_BY_ID, new BeanPropertyRowMapper<>(Player.class), id);
     }
 }

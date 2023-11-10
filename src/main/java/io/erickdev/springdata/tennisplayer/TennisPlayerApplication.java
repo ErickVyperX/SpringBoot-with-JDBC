@@ -23,5 +23,6 @@ public class TennisPlayerApplication implements CommandLineRunner {
     @Override
     public void run(String... args) {
         logger.info("Player all data: {}", playerServiceJDBC.listPlayers());
+        logger.info("Find player by ID: {}", playerServiceJDBC.showPlayer(3));
     }
 }

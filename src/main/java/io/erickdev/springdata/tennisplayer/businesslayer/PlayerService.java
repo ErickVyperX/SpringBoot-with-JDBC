@@ -19,4 +19,8 @@ public class PlayerService {
         //Add Business Logic - Treatment player data list
         return playerDAO.selectAllPlayers();
     }
+
+    public Player showPlayer(int id) {
+        return playerDAO.selectPlayerById(id);
+    }
 }
