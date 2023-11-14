@@ -2,6 +2,7 @@ package io.erickdev.springdata.tennisplayer;
 
 import io.erickdev.springdata.tennisplayer.datalayer.Player;
 import io.erickdev.springdata.tennisplayer.datalayer.PlayerRepository;
+import io.erickdev.springdata.tennisplayer.datalayer.PlayerSpringDataRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +17,14 @@ import java.time.LocalDate;
 public class TennisPlayerApplication implements CommandLineRunner {
     Logger logger = LoggerFactory.getLogger(this.getClass());
     PlayerRepository playerRepository;
+    PlayerSpringDataRepository playerSpringDataRepository;
     Player player;
 
     @Autowired
-    public TennisPlayerApplication(PlayerRepository playerRepository, Player player) {
+    public TennisPlayerApplication(PlayerRepository playerRepository, Player player, PlayerSpringDataRepository playerSpringDataRepository) {
         this.playerRepository = playerRepository;
         this.player = player;
+        this.playerSpringDataRepository = playerSpringDataRepository;
     }
 
     public static void main(String[] args) {
@@ -42,5 +45,14 @@ public class TennisPlayerApplication implements CommandLineRunner {
                 new Player(3, "Thiem", "Austria", new Date(System.currentTimeMillis()).toLocalDate(), 27)));
         playerRepository.deletePlayer(3);
         logger.info("\n\n>> Listing Players: {}\n", playerRepository.selectAllPlayers());
+        //SPRING DATA JPA
+        logger.info("\n\n>> Inserting Player: {}\n", playerSpringDataRepository.save(
+                new Player("Ronaldo", "Portugal", new Date(System.currentTimeMillis()).toLocalDate(), 36)));
+        logger.info("\n\n>> Updating Player: {}\n", playerSpringDataRepository.save(
+                new Player(4, "Ronaldo", "Portugal", Date.valueOf("1985-02-05").toLocalDate(), 38)));
+        logger.info("\n\n>> Finding Player: {}\n", playerSpringDataRepository.findById(4));
+        logger.info("\n\n>> Finding All Players: {}\n", playerSpringDataRepository.findAll());
+        playerSpringDataRepository.deleteById(4);
+        logger.info("\n\n>> Finding By Nationality: {}\n", playerSpringDataRepository.findByNationality("France"));
     }
 }
