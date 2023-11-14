@@ -41,5 +41,6 @@ public class TennisPlayerApplication implements CommandLineRunner {
         logger.info("\n\n>> Updating Player: {}\n", playerRepository.updatePlayer(
                 new Player(3, "Thiem", "Austria", new Date(System.currentTimeMillis()).toLocalDate(), 27)));
         playerRepository.deletePlayer(3);
+        logger.info("\n\n>> Listing Players: {}\n", playerRepository.selectAllPlayers());
     }
 }

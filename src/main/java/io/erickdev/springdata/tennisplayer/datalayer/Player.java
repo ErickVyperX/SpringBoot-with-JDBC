@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.StringJoiner;
 @Entity
 @Repository
+@NamedQuery(name = "select_all_players", query = "select p from Player p")
 public class Player {
     @Id
     @GeneratedValue
