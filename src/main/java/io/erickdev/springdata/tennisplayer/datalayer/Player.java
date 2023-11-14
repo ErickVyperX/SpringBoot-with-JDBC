@@ -1,12 +1,11 @@
 package io.erickdev.springdata.tennisplayer.datalayer;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import org.springframework.stereotype.Repository;
 import java.time.LocalDate;
 import java.util.StringJoiner;
-
 @Entity
+@Repository
 public class Player {
     @Id
     @GeneratedValue
